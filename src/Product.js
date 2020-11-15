@@ -10,7 +10,7 @@ function Product({ id, title, image, price, rating }) {
     // Update the document title using the browser API
     const proxyurl = "https://cors-anywhere.herokuapp.com/";
     const url = 'https://om9htfa30g.execute-api.us-east-1.amazonaws.com/dev/product/lite/B005G17SD0'
-    fetch(url)
+    fetch(proxyurl + url)
     .then(res => res.json())
     .then((data) => {
       console.log(data)

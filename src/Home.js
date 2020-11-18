@@ -1,67 +1,87 @@
-import React from "react";
+import React, {useContext, useState} from "react";
 import "./Home.css";
 import Product from "./Product";
+import { useEffect } from "react";
+import axios from 'axios';
+// import { useStateValue } from "./StateProvider";
+import { UserProvider, UserContext, UserDispatchContext } from "./UserState";
+
 
 function Home() {
+  const userDetails = useContext(UserContext);
+  const [showRecommendation, setShowRecommendation] = useState(false);
+  const [recommendations, setRecommendations] = useState([]);
+  const [recommendations2, setRecommendations2] = useState([]);
+  // let recommendations = [];
+  useEffect(() => {
+         setShowRecommendation(true);
+         console.log(userDetails)
+         const url = 'https://om9htfa30g.execute-api.us-east-1.amazonaws.com/dev/personalize/' + userDetails.email;
+         fetch(url)
+         .then(res => res.json())
+         .then((data) => {
+           setRecommendations(data.slice(0, 3).map((recommendation) =>
+               <Product id={recommendation} />
+             ));
+           setRecommendations2(data.slice(3, 6).map((recommendation) =>
+               <Product id={recommendation} />
+             ));
+         })
+         .catch(console.log)
+       // }
+    }, [userDetails]);
+
+  console.log(recommendations);
+
   return (
     <div className="home">
       <div className="home__container">
         <img
           className="home__image"
-          src="https://images-eu.ssl-images-amazon.com/images/G/02/digital/video/merch2016/Hero/Covid19/Generic/GWBleedingHero_ENG_COVIDUPDATE__XSite_1500x600_PV_en-GB._CB428684220_.jpg"
+          src="https://front-end-data-shophere.s3.amazonaws.com/backdrop.png"
           alt=""
         />
 
-        <div className="home__row">
-          <Product
-            id="12321341"
-            title="The Lean Startup: How Constant Innovation Creates Radically Successful Businesses Paperback"
-            price={11.96}
-            rating={5}
-            image="https://images-na.ssl-images-amazon.com/images/I/51Zymoq7UnL._SX325_BO1,204,203,200_.jpg"
-          />
-          <Product
-            id="49538094"
-            title="Kenwood kMix Stand Mixer for Baking, Stylish Kitchen Mixer with K-beater, Dough Hook and Whisk, 5 Litre Glass Bowl"
-            price={239.0}
-            rating={4}
-            image="https://images-na.ssl-images-amazon.com/images/I/81O%2BGNdkzKL._AC_SX450_.jpg"
-          />
+        {userDetails.email != "None" &&
+        <div className="recommendation">
+          <h1>Recommended for you</h1>
+          <div className="home__row">
+            {recommendations}
+          </div>
+          <div className="home__row">
+            {recommendations2}
+          </div>
+        </div>}
+
+        <div className="popular">
+          <h1>Popular on the website</h1>
+          <div className="home__row">
+            <Product
+              id="B00000IXIV"
+            />
+            <Product
+              id="B00006ICF6"
+            />
+            <Product
+              id="B00CTFIGXW"
+            />
+          </div>
+
+          <div className="home__row">
+            <Product
+              id="B00BZS4JT4"
+            />
+            <Product
+              id="B00AA10A0E"
+            />
+            <Product
+              id="B000F6VBLQ"
+            />
+
+
+          </div>
         </div>
 
-        <div className="home__row">
-          <Product
-            id="4903850"
-            title="Samsung LC49RG90SSUXEN 49' Curved LED Gaming Monitor"
-            price={199.99}
-            rating={3}
-            image="https://images-na.ssl-images-amazon.com/images/I/71Swqqe7XAL._AC_SX466_.jpg"
-          />
-          <Product
-            id="23445930"
-            title="Amazon Echo (3rd generation) | Smart speaker with Alexa, Charcoal Fabric"
-            price={98.99}
-            rating={5}
-            image="https://media.very.co.uk/i/very/P6LTG_SQ1_0000000071_CHARCOAL_SLf?$300x400_retinamobilex2$"
-          />
-          <Product
-            id="3254354345"
-            title="New Apple iPad Pro (12.9-inch, Wi-Fi, 128GB) - Silver (4th Generation)"
-            price={598.99}
-            rating={4}
-            image="https://images-na.ssl-images-amazon.com/images/I/816ctt5WV5L._AC_SX385_.jpg"
-          />
-        </div>
-
-        <div className="home__row">
-          <Product
-            id="90829332"
-            title="Samsung LC49RG90SSUXEN 49' Curved LED Gaming Monitor - Super Ultra Wide Dual WQHD 5120 x 1440"
-            price={1094.98}
-            rating={4}
-            image="https://images-na.ssl-images-amazon.com/images/I/6125mFrzr6L._AC_SX355_.jpg"
-          />
-        </div>
       </div>
     </div>
   );

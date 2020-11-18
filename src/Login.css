@@ -8,9 +8,9 @@
 
 .login__logo {
     margin-top: 20px;
-    margin-bottom: 20px;
+    margin-bottom: -20px;
     object-fit: contain;
-    width: 100px;
+    width: 200px;
     margin-right: auto;
     margin-left: auto;
   }
@@ -20,12 +20,10 @@
     height: fit-content;
     display: flex;
     flex-direction: column;
-    border-radius: 5px;
-    border: 1px solid lightgray;
     padding: 20px;
 }
 
-.login__container > h1 {
+.login__container > h2 {
     font-weight: 500;
     margin-bottom: 20px;
   }
@@ -47,7 +45,7 @@
 }
 
 .login__signInButton {
-    background: #f0c14b;
+    background: #a0e4f1;
     border-radius: 2px;
     width: 100%;
     height: 30px;
@@ -64,5 +62,3 @@
     margin-top: 10px;
     border-color: darkgray;
   }
-  
-  

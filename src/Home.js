@@ -16,7 +16,7 @@ function Home() {
   useEffect(() => {
          setShowRecommendation(true);
          console.log(userDetails)
-         const url = 'https://om9htfa30g.execute-api.us-east-1.amazonaws.com/dev/personalize/' + userDetails.email;
+         const url = 'https://le16raojhl.execute-api.us-east-1.amazonaws.com/dev/personalize/' + userDetails.email;
          fetch(url)
          .then(res => res.json())
          .then((data) => {

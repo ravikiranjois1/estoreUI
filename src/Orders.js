@@ -3,6 +3,7 @@ import './Orders.css'
 import { useStateValue } from "./StateProvider";
 import Order from './Order';
 import { UserProvider, UserContext, UserDispatchContext } from "./UserState";
+import {rest_endpoint} from "./constants";
 
 function Orders() {
   const [{ basket, user }, dispatch] = useStateValue();
@@ -12,7 +13,7 @@ function Orders() {
 
   useEffect(() => {
     if(userDetails) {
-      const url = 'https://om9htfa30g.execute-api.us-east-1.amazonaws.com/dev/orders/' + userDetails.email;
+      const url = rest_endpoint + 'orders/' + userDetails.email;
       fetch(url)
       .then(res => res.json())
       .then((data) => {

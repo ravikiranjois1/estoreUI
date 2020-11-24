@@ -5,7 +5,7 @@ import Order from './Order';
 import { UserProvider, UserContext, UserDispatchContext } from "./UserState";
 import OrderProductComponent from "./OrderProductComponent";
 import { useLocation, useHistory } from "react-router-dom";
-
+import {rest_endpoint} from "./constants";
 
 
 function SearchResults({key}) {
@@ -18,7 +18,7 @@ function SearchResults({key}) {
   useEffect(() => {
     console.log("Hello from search");
     console.log(location.state.searchText);
-      const url = 'https://om9htfa30g.execute-api.us-east-1.amazonaws.com/dev/search/' + location.state.searchText;
+      const url = rest_endpoint + 'search/' + location.state.searchText;
       fetch(url)
       .then(res => res.json())
       .then((data) => {

@@ -10,7 +10,8 @@ import { useLocation } from "react-router-dom";
 import { useEffect } from "react";
 import { UserProvider, UserContext, UserDispatchContext } from "./UserState";
 import { useHistory } from "react-router-dom";
-
+import {accessKeyId, secretAccessKey} from "./constants";
+import {rest_endpoint} from "./constants";
 
 
 
@@ -27,8 +28,8 @@ function Header(props) {
 
 
   AWS.config.update({
-    accessKeyId: 'AKIAYUPXS4UXVNYE2PD2',
-    secretAccessKey: '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'
+    accessKeyId: accessKeyId,
+    secretAccessKey: secretAccessKey
   })
 
   const myBucket = new AWS.S3({
@@ -59,10 +60,6 @@ function Header(props) {
     }
   }
 
-  // useEffect(() => {
-  //     handleSearch();
-  //    console.log('Do something after counter has changed', searchText);
-  // }, [searchText]);
 
 
   const uploadFile = () => {
@@ -87,7 +84,7 @@ function Header(props) {
          }
       })
 
-      const url = 'https://om9htfa30g.execute-api.us-east-1.amazonaws.com/dev/rekognition/' + userDetails.email;
+      const url = rest_endpoint + 'rekognition/' + userDetails.email;
       fetch(url)
       .then(res => res.json())
       .then((data) => {

@@ -1,10 +1,10 @@
 import React, { useContext, useState } from 'react';
 import './Login.css'
 import { Link, useHistory } from "react-router-dom";
-import { auth } from "./firebase";
 import axios from 'axios';
 // import { useStateValue } from "./StateProvider";
 import { UserProvider, UserContext, UserDispatchContext } from "./UserState";
+import {rest_endpoint} from "./constants";
 
 
 
@@ -22,7 +22,7 @@ function Login() {
       e.preventDefault();
       console.log("Clicked on signIn");
 
-      axios.post('https://om9htfa30g.execute-api.us-east-1.amazonaws.com/dev/signin',{
+      axios.post(rest_endpoint + 'signin',{
         "userID": email,
         "password": password
       })
@@ -38,20 +38,6 @@ function Login() {
       })
     }
 
-    const register = e => {
-      console.log("Clicked on register");
-        // e.preventDefault();
-        //
-        // auth
-        //     .createUserWithEmailAndPassword(email, password)
-        //     .then((auth) => {
-        //         // it successfully created a new user with email and password
-        //         if (auth) {
-        //             history.push('/')
-        //         }
-        //     })
-        //     .catch(error => alert(error.message))
-    }
 
     return (
         <div className='login'>

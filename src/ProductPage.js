@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from 'react';
-import { db } from "./firebase";
 import './ProductPage.css'
 import { useStateValue } from "./StateProvider";
+import {rest_endpoint} from "./constants";
 
 function ProductPage({ id }) {
   const [{ basket, user }, dispatch] = useStateValue();
   const [state, setState] = useState();
 
-  const url = 'https://om9htfa30g.execute-api.us-east-1.amazonaws.com/dev/product/' + id
+  const url = rest_endpoint + 'product/' + id
   if(state.id == ""){
     fetch(url)
     .then(res => res.json())

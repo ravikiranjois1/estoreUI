@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from "react";
 import "./Product.css";
 import { useStateValue } from "./StateProvider";
+import {rest_endpoint} from "./constants";
+
 
 function Product({ id }) {
   const [{ basket }, dispatch] = useStateValue();
   const [state, setState] = useState({ id: "", title: "", image: "", price: 0 });
-  const url = 'https://om9htfa30g.execute-api.us-east-1.amazonaws.com/dev/product/lite/' + id
+  const url = rest_endpoint + 'product/lite/' + id
   if(state.id == ""){
     fetch(url)
     .then(res => res.json())

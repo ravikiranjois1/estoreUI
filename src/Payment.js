@@ -7,8 +7,8 @@ import { CardElement, useStripe, useElements } from "@stripe/react-stripe-js";
 import CurrencyFormat from "react-currency-format";
 import { getBasketTotal } from "./reducer";
 import axios from 'axios';
-import { db } from "./firebase";
 import { UserProvider, UserContext, UserDispatchContext } from "./UserState";
+import {rest_endpoint} from "./constants";
 
 
 function Payment() {
@@ -53,7 +53,7 @@ function Payment() {
       });
 
 
-      axios.post('https://om9htfa30g.execute-api.us-east-1.amazonaws.com/dev/orders ',{
+      axios.post(rest_endpoint + 'orders ',{
         "id": userDetails.email,
         "products": product_ids
       })
@@ -65,42 +65,6 @@ function Payment() {
                 })
         history.replace('/');
     }
-
-    // const handleSubmit = async (event) => {
-    //     // do all the fancy stripe stuff...
-    //     event.preventDefault();
-    //     setProcessing(true);
-    //
-    //     const payload = await stripe.confirmCardPayment(clientSecret, {
-    //         payment_method: {
-    //             card: elements.getElement(CardElement)
-    //         }
-    //     }).then(({ paymentIntent }) => {
-    //         // paymentIntent = payment confirmation
-    //
-    //         db
-    //           .collection('users')
-    //           .doc(user?.uid)
-    //           .collection('orders')
-    //           .doc(paymentIntent.id)
-    //           .set({
-    //               basket: basket,
-    //               amount: paymentIntent.amount,
-    //               created: paymentIntent.created
-    //           })
-    //
-    //         setSucceeded(true);
-    //         setError(null)
-    //         setProcessing(false)
-    //
-    //         dispatch({
-    //             type: 'EMPTY_BASKET'
-    //         })
-    //
-    //         history.replace('/orders')
-    //     })
-    //
-    // }
 
 
     return (

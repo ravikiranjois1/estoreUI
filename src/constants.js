@@ -1,3 +1,3 @@
 export const rest_endpoint = 'https://le16raojhl.execute-api.us-east-1.amazonaws.com/dev/';
-export const accessKeyId = 'ASIASDF5LFVUISJGZD7D';
-export const secretAccessKey = 'zMFrLfHSJyoe7MnH3n7ZfXyzdO1V2wMnLTubmYAR';
+export const accessKeyId = 'ASIASDF5LFVUALWS7P6Z';
+export const secretAccessKey = 'hXrri8SOnNg21SMNutqb15fTiPsws3Hd+qUZt83F';

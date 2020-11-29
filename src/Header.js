@@ -33,7 +33,7 @@ function Header(props) {
   })
 
   const myBucket = new AWS.S3({
-    params: { Bucket: 'estore-rekognition'},
+    params: { Bucket: 'estore-rekognition-1'},
     region: 'us-east-1',
   })
 
